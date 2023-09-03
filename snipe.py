@@ -23,12 +23,6 @@ for p in psutil.process_iter():
                             auth_token = a.split('--remoting-auth-token=', 1)[1]
                         if '--app-port' in a:
                             app_port = a.split('--app-port=', 1)[1]
-##                        if '--region=' in a:
-##                            region = a.split('--region=', 1)[1].lower()
-##                        if '--riotclient-auth-token=' in a:
-##                            riotclient_auth_token = a.split('--riotclient-auth-token=', 1)[1]
-##                        if '--riotclient-app-port=' in a:
-##                            riotclient_app_port = a.split('--riotclient-app-port=', 1)[1]
                 break
 
 lcu_api = f'https://127.0.0.1:{app_port}'
@@ -38,15 +32,6 @@ lcu_headers = {
         'Accept': 'application/json',
         'Authorization': f'Basic {lcu_session_token}'
 }
-
-##riotclient_api = f'https://127.0.0.1:{riotclient_app_port}'
-##riotclient_session_token = base64.b64encode((f'riot:{riotclient_auth_token}').encode('ascii')).decode('ascii')
-##riotclient_headers = {
-##        'Content-Type': 'application/json',
-##        'Accept': 'application/json',
-##        'User-Agent': 'LeagueOfLegendsClient',
-##        'Authorization': f'Basic {riotclient_session_token}'
-##}
 
 
 
