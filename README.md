@@ -10,4 +10,4 @@ Instructions:
 
 \* The access token that's taken from the client at the time of starting the script is valid for one hour and doesn't get validated & refreshed by the script 
 
-Note that the script will use 13900 BE for the name change by default, if you wish to use RP instead, you will have to modify the `changeName` function
+Note that the script will use 13900 BE for the name change by default. If you wish to use RP instead, you will have to modify the `changeName` function.
