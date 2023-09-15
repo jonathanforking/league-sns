@@ -51,16 +51,16 @@ store_headers = {
 }
 session = requests.Session()
 session.headers = store_headers
-res = session.get(f'{store_url}/storefront/v3/history/purchase?language=en_GB')
-accountId = res.json()['player']['accountId']
+res = session.get(f'{store_url}/storefront/v3/history/purchase?language=en_US')
+account_id = res.json()['player']['accountId']
 
 
 
 # Change name method
-def changeName(name, accountId, session):
+def changeName(name, account_id, store_url, session):
         payload = {
                 'summonerName': name,
-                'accountId': accountId,
+                'accountId': account_id,
                 'items': [{
                         'inventoryType': 'SUMMONER_CUSTOMIZATION',
                         'itemId': 1,
@@ -72,14 +72,14 @@ def changeName(name, accountId, session):
         status = 0
         while status != 200:
                 then = time.time()
-                res = session.post(f'{store_url}/storefront/v3/summonerNameChange/purchase?language=en_GB', json=payload)
+                res = session.post(f'{store_url}/storefront/v3/summonerNameChange/purchase?language=en_US', json=payload)
                 print('request time: ' + str(then))
                 print('request duration: ' + str(res.elapsed))
                 status = res.status_code
                 print(status)
                 print(res.json())
                 if status == 429:
-                        # Hit rate limit, at this point we can give up on sniping the name
+                        # Hit rate limit, at this point we can give up
                         exit()
                 else:
                         time.sleep(1.2)
@@ -89,7 +89,7 @@ def changeName(name, accountId, session):
 # Schedule name change
 session.headers['Content-Type'] = 'application/json'
 scheduler = sched.scheduler(time.time, time.sleep)
-# Wait half a second extra to give the backend some time for cleanup (effectiveness untested)
-to_wait = available_at - time.time() + .5
-e = scheduler.enter(to_wait, 1, changeName, (name, accountId, session))
+# Wait some time extra to give the backend some time for cleanup (effectiveness untested)
+to_wait = available_at - time.time() + .1
+e = scheduler.enter(to_wait, 1, changeName, (name, account_id, store_url, session))
 scheduler.run()
