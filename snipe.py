@@ -56,7 +56,7 @@ account_id = res.json()['player']['accountId']
 
 
 
-# Change name method
+# Method that gets executed on at time of free'ing
 def changeName(name, account_id, store_url, session):
         payload = {
                 'summonerName': name,
@@ -89,7 +89,7 @@ def changeName(name, account_id, store_url, session):
 # Schedule name change
 session.headers['Content-Type'] = 'application/json'
 scheduler = sched.scheduler(time.time, time.sleep)
-# Wait some time extra to give the backend some time for cleanup (effectiveness untested)
+# Wait a little extra to give the backend some time for cleanup
 to_wait = available_at - time.time() + .1
 e = scheduler.enter(to_wait, 1, changeName, (name, account_id, store_url, session))
 scheduler.run()
