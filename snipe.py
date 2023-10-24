@@ -56,7 +56,7 @@ account_id = res.json()['player']['accountId']
 
 
 
-# Method that gets executed on at time of free'ing
+# Method that gets executed at time of free'ing
 def changeName(name, account_id, store_url, session):
         payload = {
                 'summonerName': name,
