@@ -1,3 +1,5 @@
+### Archived because Riot transitioned from summonernames to Riot IDs
+
 # league-sns
 Script that attempts to change your league of legends summonername to another one the second it becomes available (windows only, tested with python 3.11.3).
 
